@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
-import java.util.function.Consumer;
 
 
 /**
@@ -45,15 +44,18 @@ public class BinaryTree implements com.github.suloginscene.algorithm.helper.bina
         }
     }
 
+
     @Override
     public Optional<Node> find(@NonNull Node node) {
         if (root == null) return Optional.empty();
 
-        List<Node> nodes = inOrder();
+        List<Node> nodes = new ArrayList<>();
+        inOrder(nodes::add);
         return nodes.stream()
                 .filter(n -> n.equals(node))
                 .findAny();
     }
+
 
     @Override
     public void delete(@NonNull Node node) {
@@ -63,7 +65,8 @@ public class BinaryTree implements com.github.suloginscene.algorithm.helper.bina
         if (target == root) {
             root = null;
         } else {
-            List<Node> nodes = inOrder();
+            List<Node> nodes = new ArrayList<>();
+            inOrder(nodes::add);
             Node parent = nodes.stream()
                     .filter(n -> (n.isParentOf(target)))
                     .findAny().orElseThrow(() -> new IllegalStateException("Target has no parent."));
@@ -73,33 +76,14 @@ public class BinaryTree implements com.github.suloginscene.algorithm.helper.bina
 
         List<Node> descendants = new ArrayList<>();
         if (target.hasLeft()) {
-            descendants.addAll(inOrder(target.getLeft()));
+            inOrder(target.getLeft(), descendants::add);
         }
         if (target.hasRight()) {
-            descendants.addAll(inOrder(target.getRight()));
+            inOrder(target.getRight(), descendants::add);
         }
         for (Node n : descendants) {
             save(new Node(n.getValue()));
         }
-    }
-
-
-    public List<Node> inOrder() {
-        return inOrder(root);
-    }
-
-    private List<Node> inOrder(Node root) {
-        List<Node> nodes = new ArrayList<>();
-        recursiveInorder(root, nodes::add);
-        return nodes;
-    }
-
-    private void recursiveInorder(Node node, Consumer<Node> consumer) {
-        if (node == null) return;
-
-        recursiveInorder(node.getLeft(), consumer);
-        consumer.accept(node);
-        recursiveInorder(node.getRight(), consumer);
     }
 
 }

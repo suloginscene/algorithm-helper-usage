@@ -1,25 +1,27 @@
 package cf.scenecho.algorithm.impl.binarytree;
 
+import com.github.suloginscene.algorithm.helper.integers.Integers;
+import com.github.suloginscene.algorithm.helper.integers.IntegersFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 class BinaryTreeTest {
 
-    int n = 16;
     BinaryTree binaryTree;
+
+    int n = 15;
+    Integers integers;
 
 
     @BeforeEach
     void setup() {
         binaryTree = new BinaryTree();
+        integers = IntegersFactory.increasingFromOne(n);
     }
 
     @AfterEach
@@ -30,63 +32,90 @@ class BinaryTreeTest {
 
     @Test
     void save() {
-        for (int i = 1; i <= n; i++) {
-            binaryTree.save(new Node(i));
+        for (Integer i : integers) {
+            Node node = new Node(i);
+            binaryTree.save(node);
         }
 
-        List<Node> nodes = binaryTree.inOrder();
-        assertEquals(n, nodes.size());
+        assertEquals(n, binaryTree.size());
+    }
+
+
+    @Test
+    void find_root() {
+        save();
+
+        Node target = new Node(integers.getFirst());
+        Node found = binaryTree.find(target).orElse(null);
+
+        assertEquals(target, found);
     }
 
     @Test
-    void find_success() {
+    void find_mid() {
         save();
 
-        Integer key = 1;
-        Node target = new Node(key);
+        Node target = new Node(integers.getMid());
         Node found = binaryTree.find(target).orElse(null);
 
-        assertNotNull(found);
-        assertEquals(key, found.getValue());
+        assertEquals(target, found);
     }
 
     @Test
     void find_fail() {
         save();
 
-        Integer key = n + 1;
-        Node target = new Node(key);
+        Node target = new Node(n + 1);
         Node found = binaryTree.find(target).orElse(null);
 
         assertNull(found);
     }
 
+
     @Test
     void delete_root() {
         save();
 
-        Integer key = 1;
-        Node target = new Node(key);
+        Node target = new Node(integers.getFirst());
         binaryTree.delete(target);
 
         Node found = binaryTree.find(target).orElse(null);
         assertNull(found);
-        List<Node> nodes = binaryTree.inOrder();
-        assertEquals(n - 1, nodes.size());
+        assertEquals(n - 1, binaryTree.size());
+    }
+
+    @Test
+    void delete_mid() {
+        save();
+
+        Node target = new Node(integers.getMid());
+        binaryTree.delete(target);
+
+        Node found = binaryTree.find(target).orElse(null);
+        assertNull(found);
+        assertEquals(n - 1, binaryTree.size());
     }
 
     @Test
     void delete_leaf() {
         save();
 
-        Integer key = n;
-        Node target = new Node(key);
+        Node target = new Node(integers.getLast());
         binaryTree.delete(target);
 
         Node found = binaryTree.find(target).orElse(null);
         assertNull(found);
-        List<Node> nodes = binaryTree.inOrder();
-        assertEquals(n - 1, nodes.size());
+        assertEquals(n - 1, binaryTree.size());
+    }
+
+    @Test
+    void delete_fail() {
+        save();
+
+        Node target = new Node(n + 1);
+        binaryTree.delete(target);
+
+        assertEquals(n, binaryTree.size());
     }
 
 }
