@@ -2,6 +2,8 @@ package cf.scenecho.algorithm.impl.array.sort;
 
 import com.github.suloginscene.algorithm.helper.array.sort.Sort;
 
+import static java.lang.System.arraycopy;
+
 
 public class MergeSort implements Sort {
 
@@ -41,7 +43,7 @@ public class MergeSort implements Sort {
             arr[ptr++] = aPtr <= aTail ? array[aPtr++] : array[bPtr++];
         }
 
-        System.arraycopy(arr, 0, array, aHead, n);
+        arraycopy(arr, 0, array, aHead, n);
     }
 
 }

@@ -15,7 +15,7 @@ class BinarySearchTreeTest {
 
     BinarySearchTree bst;
 
-    int n = 15;
+    int n = 7;
     Integers integers;
 
 
@@ -27,9 +27,7 @@ class BinarySearchTreeTest {
 
     @AfterEach
     void print() {
-        integers.print();
         bst.print();
-        bst.validateBst();
     }
 
 
@@ -103,7 +101,6 @@ class BinarySearchTreeTest {
         save();
 
         Integer key = integers.getMid();
-        System.out.println(key);
         bst.delete(key);
 
         Node found = bst.findNode(key).orElse(null);

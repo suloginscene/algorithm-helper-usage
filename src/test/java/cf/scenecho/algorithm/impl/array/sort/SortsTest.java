@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.BUBBLE;
 import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.HEAP;
 import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.INSERTION;
@@ -36,7 +34,7 @@ class SortsTest {
 
         array = IntegersFactory.stablyShuffled(n).toArray();
         before = array.clone();
-        expected = Arrays.stream(array).sorted().toArray();
+        expected = IntegersFactory.increasingFromOne(n).toArray();
     }
 
     @AfterEach

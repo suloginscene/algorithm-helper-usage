@@ -13,9 +13,7 @@ public class BinarySearchTree implements com.github.suloginscene.algorithm.helpe
 
 
     @Override
-    public void save(@NonNull Node node) {
-        validateKey(node.getKey());
-
+    public void doSave(@NonNull Node node) {
         if (root == null) {
             root = node;
             return;
@@ -30,8 +28,6 @@ public class BinarySearchTree implements com.github.suloginscene.algorithm.helpe
 
         if (node.isSmallerThan(parent)) parent.setLeft(node);
         else parent.setRight(node);
-
-        validateBst();
     }
 
 
@@ -48,7 +44,7 @@ public class BinarySearchTree implements com.github.suloginscene.algorithm.helpe
 
 
     @Override
-    public void delete(@NonNull Integer key) {
+    public void doDelete(@NonNull Integer key) {
         Node node = findNode(key).orElse(null);
         if (node == null) return;
 
@@ -89,8 +85,6 @@ public class BinarySearchTree implements com.github.suloginscene.algorithm.helpe
             if (isLeftChild) parent.setLeft(subs);
             else parent.setRight(subs);
         }
-
-        validateBst();
     }
 
 }
