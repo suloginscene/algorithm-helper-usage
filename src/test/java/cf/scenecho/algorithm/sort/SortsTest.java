@@ -1,19 +1,19 @@
-package cf.scenecho.algorithm.impl.array.sort;
+package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithm.helper.array.sort.Sorts;
-import com.github.suloginscene.algorithm.helper.array.sort.support.SortsProfiler;
-import com.github.suloginscene.algorithm.helper.integers.IntegersFactory;
+import com.github.suloginscene.algorithmhelper.core.sort.Sorts;
+import com.github.suloginscene.algorithmhelper.util.profiler.SortsProfiler;
+import com.github.suloginscene.algorithmhelper.util.numbergenerator.IntegersFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.BUBBLE;
-import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.HEAP;
-import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.INSERTION;
-import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.MERGE;
-import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.QUICK;
-import static com.github.suloginscene.algorithm.helper.array.sort.Strategy.SELECTION;
+import static com.github.suloginscene.algorithmhelper.core.sort.Strategy.BUBBLE;
+import static com.github.suloginscene.algorithmhelper.core.sort.Strategy.HEAP;
+import static com.github.suloginscene.algorithmhelper.core.sort.Strategy.INSERTION;
+import static com.github.suloginscene.algorithmhelper.core.sort.Strategy.MERGE;
+import static com.github.suloginscene.algorithmhelper.core.sort.Strategy.QUICK;
+import static com.github.suloginscene.algorithmhelper.core.sort.Strategy.SELECTION;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
@@ -32,9 +32,9 @@ class SortsTest {
     void setup() {
         sorts = new SortsProfiler(new SortFactoryImpl());
 
-        array = IntegersFactory.stablyShuffled(n).toArray();
+        array = IntegersFactory.stablyShuffled(n).toIntArray();
         before = array.clone();
-        expected = IntegersFactory.increasingFromOne(n).toArray();
+        expected = IntegersFactory.increasingFromOne(n).toIntArray();
     }
 
     @AfterEach

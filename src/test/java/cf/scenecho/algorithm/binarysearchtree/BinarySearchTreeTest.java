@@ -1,7 +1,7 @@
-package cf.scenecho.algorithm.impl.binarytree.bst;
+package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithm.helper.integers.Integers;
-import com.github.suloginscene.algorithm.helper.integers.IntegersFactory;
+import com.github.suloginscene.algorithmhelper.util.numbergenerator.Integers;
+import com.github.suloginscene.algorithmhelper.util.numbergenerator.IntegersFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BinarySearchTreeTest {
 
-    BinarySearchTree bst;
-
     int n = 7;
     Integers integers;
+
+    BinarySearchTree bst;
 
 
     @BeforeEach
@@ -35,8 +35,7 @@ class BinarySearchTreeTest {
     void save() {
         for (Integer key : integers) {
             String value = Integer.toBinaryString(key);
-            Node node = new Node(key, value);
-            bst.save(node);
+            bst.save(key, value);
         }
 
         assertEquals(n, bst.size());
@@ -48,8 +47,7 @@ class BinarySearchTreeTest {
 
         int key = 1;
         String value = Integer.toBinaryString(key);
-        Node node = new Node(key, value);
-        assertThrows(IllegalArgumentException.class, () -> bst.save(node));
+        assertThrows(IllegalArgumentException.class, () -> bst.save(key, value));
     }
 
 
@@ -91,7 +89,7 @@ class BinarySearchTreeTest {
         Integer key = integers.getFirst();
         bst.delete(key);
 
-        Node found = bst.findNode(key).orElse(null);
+        String found = bst.findValue(key).orElse(null);
         assertNull(found);
         assertEquals(n - 1, bst.size());
     }
@@ -103,7 +101,7 @@ class BinarySearchTreeTest {
         Integer key = integers.getMid();
         bst.delete(key);
 
-        Node found = bst.findNode(key).orElse(null);
+        String found = bst.findValue(key).orElse(null);
         assertNull(found);
         assertEquals(n - 1, bst.size());
     }
@@ -115,7 +113,7 @@ class BinarySearchTreeTest {
         Integer key = integers.getLast();
         bst.delete(key);
 
-        Node found = bst.findNode(key).orElse(null);
+        String found = bst.findValue(key).orElse(null);
         assertNull(found);
         assertEquals(n - 1, bst.size());
     }

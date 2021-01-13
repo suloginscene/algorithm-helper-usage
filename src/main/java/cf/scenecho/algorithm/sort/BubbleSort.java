@@ -1,8 +1,8 @@
-package cf.scenecho.algorithm.impl.array.sort;
+package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithm.helper.array.sort.Sort;
+import com.github.suloginscene.algorithmhelper.core.sort.Sort;
 
-import static com.github.suloginscene.algorithm.helper.array.sort.support.SortUtil.swap;
+import static com.github.suloginscene.algorithmhelper.util.library.SortUtil.swap;
 
 
 public class BubbleSort implements Sort {

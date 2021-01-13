@@ -1,7 +1,7 @@
-package cf.scenecho.algorithm.impl.array.sort;
+package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithm.helper.array.sort.Sort;
-import com.github.suloginscene.algorithm.helper.array.sort.SortFactory;
+import com.github.suloginscene.algorithmhelper.core.sort.Sort;
+import com.github.suloginscene.algorithmhelper.core.sort.SortFactory;
 
 
 public class SortFactoryImpl implements SortFactory {
