@@ -1,11 +1,11 @@
 package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithmhelper.core.sort.Sort;
+import com.github.suloginscene.algorithmhelper.core.sort.Algorithm;
 
-import static com.github.suloginscene.algorithmhelper.util.library.SortUtil.swap;
+import static com.github.suloginscene.algorithmhelper.util.SortUtil.swap;
 
 
-public class QuickSort implements Sort {
+public class QuickSort implements Algorithm {
 
     @Override
     public void execute(int[] array) {

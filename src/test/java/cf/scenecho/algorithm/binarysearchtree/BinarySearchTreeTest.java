@@ -1,10 +1,16 @@
 package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithmhelper.util.numbergenerator.Integers;
-import com.github.suloginscene.algorithmhelper.util.numbergenerator.IntegersFactory;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BST;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BSTProfiler;
+import com.github.suloginscene.algorithmhelper.util.BSTUtil;
+import com.github.suloginscene.algorithmhelper.util.Integers;
+import com.github.suloginscene.algorithmhelper.util.IntegersFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -13,37 +19,39 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BinarySearchTreeTest {
 
-    int n = 7;
+    int n = 11;
     Integers integers;
 
-    BinarySearchTree bst;
+    BST<Integer, String> bst;
 
 
     @BeforeEach
     void setup() {
-        bst = new BinarySearchTree();
-        integers = IntegersFactory.stablyShuffled(n);
+        bst = new BSTProfiler<>(new BinarySearchTree());
+        integers = IntegersFactory.stablyShuffled(n, true);
+    }
+
+    private void initData() {
+        List<BST.Node<Integer, String>> nodes = integers.toNodeList(Integer::toBinaryString);
+        BSTUtil.initWithProfiling(bst, nodes, 5000);
     }
 
     @AfterEach
     void print() {
-        bst.print();
+        bst.printByKey();
+        bst.printPaths();
     }
 
 
     @Test
     void save() {
-        for (Integer key : integers) {
-            String value = Integer.toBinaryString(key);
-            bst.save(key, value);
-        }
-
+        initData();
         assertEquals(n, bst.size());
     }
 
     @Test
     void save_fail() {
-        save();
+        initData();
 
         int key = 1;
         String value = Integer.toBinaryString(key);
@@ -53,7 +61,7 @@ class BinarySearchTreeTest {
 
     @Test
     void find_root() {
-        save();
+        initData();
 
         Integer key = integers.getFirst();
         Object value = bst.findValue(key).orElse(null);
@@ -63,7 +71,7 @@ class BinarySearchTreeTest {
 
     @Test
     void find_mid() {
-        save();
+        initData();
 
         Integer key = integers.getMid();
         Object value = bst.findValue(key).orElse(null);
@@ -73,7 +81,7 @@ class BinarySearchTreeTest {
 
     @Test
     void find_fail() {
-        save();
+        initData();
 
         int key = n + 1;
         Object value = bst.findValue(key).orElse(null);
@@ -84,7 +92,7 @@ class BinarySearchTreeTest {
 
     @Test
     void delete_root() {
-        save();
+        initData();
 
         Integer key = integers.getFirst();
         bst.delete(key);
@@ -96,7 +104,7 @@ class BinarySearchTreeTest {
 
     @Test
     void delete_mid() {
-        save();
+        initData();
 
         Integer key = integers.getMid();
         bst.delete(key);
@@ -108,7 +116,7 @@ class BinarySearchTreeTest {
 
     @Test
     void delete_leaf() {
-        save();
+        initData();
 
         Integer key = integers.getLast();
         bst.delete(key);
@@ -120,12 +128,23 @@ class BinarySearchTreeTest {
 
     @Test
     void delete_fail() {
-        save();
+        initData();
 
         Integer key = n + 1;
         bst.delete(key);
 
         assertEquals(n, bst.size());
+    }
+
+    @Test
+    void inOrder() {
+        initData();
+
+        List<Integer> inordered = new ArrayList<>();
+        bst.inOrder(n -> inordered.add(n.getKey()));
+
+        List<Integer> sorted = IntegersFactory.increasingFromOne(n).toIntegerList();
+        assertEquals(sorted, inordered);
     }
 
 }

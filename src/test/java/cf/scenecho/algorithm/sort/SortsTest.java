@@ -1,8 +1,8 @@
 package cf.scenecho.algorithm.sort;
 
 import com.github.suloginscene.algorithmhelper.core.sort.Sorts;
-import com.github.suloginscene.algorithmhelper.util.profiler.SortsProfiler;
-import com.github.suloginscene.algorithmhelper.util.numbergenerator.IntegersFactory;
+import com.github.suloginscene.algorithmhelper.core.sort.SortsProfiler;
+import com.github.suloginscene.algorithmhelper.util.IntegersFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,9 +30,9 @@ class SortsTest {
 
     @BeforeEach
     void setup() {
-        sorts = new SortsProfiler(new SortFactoryImpl());
+        sorts = new SortsProfiler(new AlgorithmContainerImpl());
 
-        array = IntegersFactory.stablyShuffled(n).toIntArray();
+        array = IntegersFactory.stablyShuffled(n, true).toIntArray();
         before = array.clone();
         expected = IntegersFactory.increasingFromOne(n).toIntArray();
     }
