@@ -18,6 +18,11 @@ public class BST extends BinarySearchTree<Integer, String> {
         return root;
     }
 
+    @Override
+    public void setRoot(Node<Integer, String> node) {
+        root = node;
+    }
+
 
     @Override
     protected void doSave(@NonNull Node<Integer, String> node) {
@@ -50,46 +55,25 @@ public class BST extends BinarySearchTree<Integer, String> {
 
     @Override
     protected void doDelete(@NonNull Integer key) {
-        Node<Integer, String> node = findNode(key).orElse(null);
-        if (node == null) return;
+        Node<Integer, String> target = findNode(key).orElse(null);
+        if (target == null) return;
 
-        Node<Integer, String> parent = null;
-        Boolean isLeftChild = null;
-        if (node == root) {
-            root = null;
+        Node<Integer, String> subs;
+        if (!target.hasChild()) {
+            subs = null;
+        } else if (target.hasOnlyChild()) {
+            subs = (target.hasLeft()) ? target.getLeft() : target.getRight();
         } else {
-            parent = root;
-            while (!parent.isParentOf(node)) {
-                parent = parent.isBiggerThan(node) ? parent.getLeft() : parent.getRight();
+            subs = findSuccessorOf(target).orElseThrow();
+            subs.setLeft(target.getLeft());
+            if (target.rightIs(subs)) {
+                transplant(subs, null);
+            } else {
+                transplant(subs, subs.getRight());
+                subs.setRight(target.getRight());
             }
-            isLeftChild = parent.leftIs(node);
-            if (isLeftChild) parent.setLeft(null);
-            else parent.setRight(null);
         }
-
-        Node<Integer, String> subs = null;
-        if (node.hasOnlyChild()) {
-            subs = (node.hasLeft()) ? node.getLeft() : node.getRight();
-        } else if (node.hasBothChildren()) {
-            subs = node.getRight();
-            Node<Integer, String> parentOfSubs = node;
-            while (subs.hasLeft()) {
-                parentOfSubs = subs;
-                subs = subs.getLeft();
-            }
-            if (parentOfSubs != node) {
-                parentOfSubs.setLeft(subs.getRight());
-                subs.setRight(node.getRight());
-            }
-            subs.setLeft(node.getLeft());
-        }
-
-        if (parent == null) {
-            root = subs;
-        } else {
-            if (isLeftChild) parent.setLeft(subs);
-            else parent.setRight(subs);
-        }
+        transplant(target, subs);
     }
 
     @Override

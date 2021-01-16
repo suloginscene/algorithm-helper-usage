@@ -1,7 +1,7 @@
 package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BSTProfiler;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.Node;
 import com.github.suloginscene.algorithmhelper.util.BSTUtil;
 import com.github.suloginscene.algorithmhelper.util.Integers;
@@ -18,17 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class BSTTest {
+class AVLTest {
 
-    int n = 12;
+    int n = 27;
     Integers integers;
 
     BinarySearchTree<Integer, String> bst;
 
-
     @BeforeEach
     void setup() {
-        bst = new BSTProfiler<>(new BST());
+        bst = new BSTProfiler<>(new AVL());
         integers = IntegersFactory.stablyShuffled(n, true);
     }
 
@@ -147,5 +146,6 @@ class BSTTest {
         List<Integer> sorted = IntegersFactory.increasingFromOne(n).toIntegerList();
         assertEquals(sorted, inordered);
     }
+
 
 }
