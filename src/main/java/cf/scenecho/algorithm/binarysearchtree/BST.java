@@ -1,13 +1,14 @@
 package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BST;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.Node;
 import lombok.NonNull;
 
 import java.util.Optional;
 import java.util.function.Consumer;
 
 
-public class BinarySearchTree extends BST<Integer, String> {
+public class BST extends BinarySearchTree<Integer, String> {
 
     private Node<Integer, String> root;
 

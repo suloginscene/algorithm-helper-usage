@@ -1,7 +1,8 @@
 package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BST;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BSTProfiler;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.Node;
 import com.github.suloginscene.algorithmhelper.util.BSTUtil;
 import com.github.suloginscene.algorithmhelper.util.Integers;
 import com.github.suloginscene.algorithmhelper.util.IntegersFactory;
@@ -17,28 +18,28 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class BinarySearchTreeTest {
+class BSTTest {
 
-    int n = 11;
+    int n = 7;
     Integers integers;
 
-    BST<Integer, String> bst;
+    BinarySearchTree<Integer, String> bst;
 
 
     @BeforeEach
     void setup() {
-        bst = new BSTProfiler<>(new BinarySearchTree());
+        bst = new BSTProfiler<>(new BST());
         integers = IntegersFactory.stablyShuffled(n, true);
     }
 
     private void initData() {
-        List<BST.Node<Integer, String>> nodes = integers.toNodeList(Integer::toBinaryString);
-        BSTUtil.initWithProfiling(bst, nodes, 5000);
+        List<Node<Integer, String>> nodes = integers.toNodeList(Integer::toHexString);
+        BSTUtil.initWithProfiling(bst, nodes, 2000);
     }
 
     @AfterEach
     void print() {
-        bst.printByKey();
+        bst.print(Node::toString);
         bst.printPaths();
     }
 
@@ -66,7 +67,7 @@ class BinarySearchTreeTest {
         Integer key = integers.getFirst();
         Object value = bst.findValue(key).orElse(null);
 
-        assertEquals(Integer.toBinaryString(key), value);
+        assertEquals(Integer.toHexString(key), value);
     }
 
     @Test
@@ -76,7 +77,7 @@ class BinarySearchTreeTest {
         Integer key = integers.getMid();
         Object value = bst.findValue(key).orElse(null);
 
-        assertEquals(Integer.toBinaryString(key), value);
+        assertEquals(Integer.toHexString(key), value);
     }
 
     @Test
