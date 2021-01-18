@@ -14,12 +14,12 @@ public class BST extends BinarySearchTree<Integer, String> {
 
 
     @Override
-    public Node<Integer, String> getRoot() {
+    protected Node<Integer, String> getRoot() {
         return root;
     }
 
     @Override
-    public void setRoot(Node<Integer, String> node) {
+    protected void setRoot(Node<Integer, String> node) {
         root = node;
     }
 

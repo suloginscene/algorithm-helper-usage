@@ -14,14 +14,15 @@ public class AVL extends BinarySearchTree<Integer, String> {
 
 
     @Override
-    public N getRoot() {
+    protected N getRoot() {
         return root;
     }
 
     @Override
-    public void setRoot(Node<Integer, String> node) {
+    protected void setRoot(Node<Integer, String> node) {
         root = (N) node;
     }
+
 
     @Override
     protected void doSave(@NonNull Node<Integer, String> superNode) {
