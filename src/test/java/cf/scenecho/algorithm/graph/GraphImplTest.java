@@ -98,7 +98,7 @@ class GraphImplTest {
         graph = graph.minimumSpanningTree();
 
         assertFalse(graph.hasCycle());
-        assertEquals(graph.allVertices().size() - 1, graph.allPaths().size());
+        assertEquals(graph.allVertices().size() - 1, graph.allEdges().size());
     }
 
 }

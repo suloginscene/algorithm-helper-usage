@@ -32,8 +32,8 @@ class AVLTest {
     }
 
     private void initData() {
-        List<Node<Integer, String>> nodes = integers.toNodeList(Integer::toHexString);
-        BSTUtil.initWithProfiling(bst, nodes, 2000);
+        List<AVL.N> nodes = integers.toTypeList(integer -> new AVL.N(integer, Integer.toHexString(integer)));
+        BSTUtil.saveDataLoggingProgress(bst, nodes, 2000);
     }
 
     @AfterEach

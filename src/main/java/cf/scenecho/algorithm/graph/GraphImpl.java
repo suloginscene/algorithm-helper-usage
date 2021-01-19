@@ -3,7 +3,7 @@ package cf.scenecho.algorithm.graph;
 import com.github.suloginscene.algorithmhelper.core.graph.Alphabet;
 import com.github.suloginscene.algorithmhelper.core.graph.Course;
 import com.github.suloginscene.algorithmhelper.core.graph.Graph;
-import com.github.suloginscene.algorithmhelper.core.graph.Path;
+import com.github.suloginscene.algorithmhelper.core.graph.Edge;
 import com.github.suloginscene.algorithmhelper.core.graph.SetSet;
 import lombok.NonNull;
 
@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 public class GraphImpl extends Graph<Alphabet> {
 
     private final Map<Alphabet, Set<Alphabet>> vertexMap = new HashMap<>();
-    private final Map<Path<Alphabet>, Path<Alphabet>> pathMap = new HashMap<>();
+    private final Map<Edge<Alphabet>, Edge<Alphabet>> edgeMap = new HashMap<>();
 
 
     @Override
@@ -23,8 +23,8 @@ public class GraphImpl extends Graph<Alphabet> {
     }
 
     @Override
-    protected Map<Path<Alphabet>, Path<Alphabet>> getPathMap() {
-        return pathMap;
+    protected Map<Edge<Alphabet>, Edge<Alphabet>> getEdgeMap() {
+        return edgeMap;
     }
 
 
@@ -128,7 +128,7 @@ public class GraphImpl extends Graph<Alphabet> {
             if (vertexMap.containsKey(current)) {
                 for (Alphabet neighbor : vertexMap.get(current)) {
                     int knownDist = distances.get(neighbor);
-                    int altDist = currDist + pathMap.get(new Path<>(current, neighbor, 0)).getWeight();
+                    int altDist = currDist + edgeMap.get(new Edge<>(current, neighbor, 0)).getWeight();
                     if (altDist < knownDist) {
                         distances.put(neighbor, altDist);
                         predecessor.put(neighbor, current);
@@ -164,11 +164,11 @@ public class GraphImpl extends Graph<Alphabet> {
             sets.add(set);
         }
 
-        PriorityQueue<Path<Alphabet>> pq = new PriorityQueue<>(pathMap.keySet());
+        PriorityQueue<Edge<Alphabet>> pq = new PriorityQueue<>(edgeMap.keySet());
 
         GraphImpl graph = new GraphImpl();
         while (sets.size() > 1 && !pq.isEmpty()) {
-            Path<Alphabet> shortest = pq.poll();
+            Edge<Alphabet> shortest = pq.poll();
             Alphabet from = shortest.getFrom();
             Alphabet to = shortest.getTo();
             Set<Alphabet> setA = sets.findSet(from);

@@ -1,7 +1,7 @@
 package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithmhelper.core.sort.Sorts;
-import com.github.suloginscene.algorithmhelper.core.sort.SortsProfiler;
+import com.github.suloginscene.algorithmhelper.core.sort.Sorter;
+import com.github.suloginscene.algorithmhelper.core.sort.SorterProfiler;
 import com.github.suloginscene.algorithmhelper.util.IntegersFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
 @Slf4j
-class SortsTest {
+class SorterTest {
 
-    Sorts sorts;
+    Sorter sorter;
 
     int n = 32;
     int[] array;
@@ -30,7 +30,7 @@ class SortsTest {
 
     @BeforeEach
     void setup() {
-        sorts = new SortsProfiler(new AlgorithmContainerImpl());
+        sorter = new SorterProfiler(new AlgorithmContainerImpl());
 
         array = IntegersFactory.stablyShuffled(n, true).toIntArray();
         before = array.clone();
@@ -45,43 +45,43 @@ class SortsTest {
 
     @Test
     void bubble() {
-        sorts.setStrategy(BUBBLE);
-        sorts.sort(array);
+        sorter.setStrategy(BUBBLE);
+        sorter.sort(array);
         assertArrayEquals(expected, array);
     }
 
     @Test
     void selection() {
-        sorts.setStrategy(SELECTION);
-        sorts.sort(array);
+        sorter.setStrategy(SELECTION);
+        sorter.sort(array);
         assertArrayEquals(expected, array);
     }
 
     @Test
     void insertion() {
-        sorts.setStrategy(INSERTION);
-        sorts.sort(array);
+        sorter.setStrategy(INSERTION);
+        sorter.sort(array);
         assertArrayEquals(expected, array);
     }
 
     @Test
     void heap() {
-        sorts.setStrategy(HEAP);
-        sorts.sort(array);
+        sorter.setStrategy(HEAP);
+        sorter.sort(array);
         assertArrayEquals(expected, array);
     }
 
     @Test
     void merge() {
-        sorts.setStrategy(MERGE);
-        sorts.sort(array);
+        sorter.setStrategy(MERGE);
+        sorter.sort(array);
         assertArrayEquals(expected, array);
     }
 
     @Test
     void quick() {
-        sorts.setStrategy(QUICK);
-        sorts.sort(array);
+        sorter.setStrategy(QUICK);
+        sorter.sort(array);
         assertArrayEquals(expected, array);
     }
 

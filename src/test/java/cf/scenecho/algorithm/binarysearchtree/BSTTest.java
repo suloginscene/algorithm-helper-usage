@@ -1,7 +1,7 @@
 package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BSTProfiler;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.Node;
 import com.github.suloginscene.algorithmhelper.util.BSTUtil;
 import com.github.suloginscene.algorithmhelper.util.Integers;
@@ -32,9 +32,9 @@ class BSTTest {
         integers = IntegersFactory.stablyShuffled(n, true);
     }
 
-    private void initData() {
-        List<Node<Integer, String>> nodes = integers.toNodeList(Integer::toHexString);
-        BSTUtil.initWithProfiling(bst, nodes, 2000);
+    void initData() {
+        List<Node<Integer, String>> nodes = integers.toTypeList(integer -> new Node<>(integer, Integer.toHexString(integer)));
+        BSTUtil.saveDataLoggingProgress(bst, nodes, 2000);
     }
 
     @AfterEach
