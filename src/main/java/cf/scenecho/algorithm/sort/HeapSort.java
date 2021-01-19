@@ -1,15 +1,15 @@
 package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithmhelper.core.sort.Algorithm;
+import com.github.suloginscene.algorithmhelper.core.sort.Sort;
 
 import static com.github.suloginscene.algorithmhelper.util.SortUtil.swap;
 import static java.lang.System.arraycopy;
 
 
-public class HeapSort implements Algorithm {
+public class HeapSort extends Sort {
 
     @Override
-    public void execute(int[] array) {
+    protected void doExecute(int[] array) {
         int n = array.length;
         int head = 0;
 

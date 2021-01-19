@@ -1,9 +1,9 @@
 package cf.scenecho.algorithm.binarysearchtree;
 
-import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BSTProfiler;
+import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTreeProfiler;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.BinarySearchTree;
 import com.github.suloginscene.algorithmhelper.core.binarysearchtree.Node;
-import com.github.suloginscene.algorithmhelper.util.BSTUtil;
+import com.github.suloginscene.algorithmhelper.util.BinarySearchTreeUtil;
 import com.github.suloginscene.algorithmhelper.util.Integers;
 import com.github.suloginscene.algorithmhelper.util.IntegersFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -27,13 +27,13 @@ class AVLTest {
 
     @BeforeEach
     void setup() {
-        bst = new BSTProfiler<>(new AVL());
+        bst = new BinarySearchTreeProfiler<>(new AVL());
         integers = IntegersFactory.stablyShuffled(n, true);
     }
 
     private void initData() {
         List<AVL.N> nodes = integers.toTypeList(integer -> new AVL.N(integer, Integer.toHexString(integer)));
-        BSTUtil.saveDataLoggingProgress(bst, nodes, 2000);
+        BinarySearchTreeUtil.saveDataLoggingProgress(bst, nodes, 2000);
     }
 
     @AfterEach

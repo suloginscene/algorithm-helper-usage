@@ -1,14 +1,14 @@
 package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithmhelper.core.sort.Algorithm;
+import com.github.suloginscene.algorithmhelper.core.sort.Sort;
 
 import static com.github.suloginscene.algorithmhelper.util.SortUtil.swap;
 
 
-public class SelectionSort implements Algorithm {
+public class SelectionSort extends Sort {
 
     @Override
-    public void execute(int[] array) {
+    protected void doExecute(int[] array) {
         int n = array.length;
         int first = 0;
         int last = n - 1;

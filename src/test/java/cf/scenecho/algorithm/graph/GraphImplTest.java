@@ -1,6 +1,6 @@
 package cf.scenecho.algorithm.graph;
 
-import com.github.suloginscene.algorithmhelper.core.graph.Alphabet;
+import com.github.suloginscene.algorithmhelper.util.Alphabet;
 import com.github.suloginscene.algorithmhelper.core.graph.Course;
 import com.github.suloginscene.algorithmhelper.core.graph.Graph;
 import org.junit.jupiter.api.AfterEach;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.suloginscene.algorithmhelper.core.graph.Alphabet.*;
+import static com.github.suloginscene.algorithmhelper.util.Alphabet.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

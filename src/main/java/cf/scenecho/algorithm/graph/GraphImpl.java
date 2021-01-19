@@ -1,6 +1,6 @@
 package cf.scenecho.algorithm.graph;
 
-import com.github.suloginscene.algorithmhelper.core.graph.Alphabet;
+import com.github.suloginscene.algorithmhelper.util.Alphabet;
 import com.github.suloginscene.algorithmhelper.core.graph.Course;
 import com.github.suloginscene.algorithmhelper.core.graph.Graph;
 import com.github.suloginscene.algorithmhelper.core.graph.Edge;

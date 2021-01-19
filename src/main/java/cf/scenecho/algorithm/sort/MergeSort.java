@@ -1,14 +1,14 @@
 package cf.scenecho.algorithm.sort;
 
-import com.github.suloginscene.algorithmhelper.core.sort.Algorithm;
+import com.github.suloginscene.algorithmhelper.core.sort.Sort;
 
 import static java.lang.System.arraycopy;
 
 
-public class MergeSort implements Algorithm {
+public class MergeSort extends Sort {
 
     @Override
-    public void execute(int[] array) {
+    protected void doExecute(int[] array) {
         int n = array.length;
         int first = 0;
         int last = n - 1;

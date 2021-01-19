@@ -30,7 +30,7 @@ class SorterTest {
 
     @BeforeEach
     void setup() {
-        sorter = new SorterProfiler(new AlgorithmContainerImpl());
+        sorter = new SorterProfiler(new SortContainerImpl());
 
         array = IntegersFactory.stablyShuffled(n, true).toIntArray();
         before = array.clone();
